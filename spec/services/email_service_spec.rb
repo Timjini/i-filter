@@ -3,16 +3,16 @@
 require 'spec_helper'
 require 'net/imap'
 require 'mail'
-require_relative '../email_service'
+require_relative '../../app/services/email_service'
 
 RSpec.describe EmailService do # rubocop:disable Metrics/BlockLength
   let(:email_config) do
     {
-      'address' => 'imap.example.com',
+      'address' => 'imap.hostinger.com',
       'port' => 993,
       'enable_ssl' => true,
-      'user_name' => 'user@example.com',
-      'password' => 'secret'
+      'user_name' => 'info@devhl.dev',
+      'password' => '150150@Hl'
     }
   end
 
@@ -26,7 +26,7 @@ RSpec.describe EmailService do # rubocop:disable Metrics/BlockLength
 
   describe '#connect_to_imap' do
     it 'connects to the IMAP server successfully' do
-      expect(Net::IMAP).to receive(:new).with('imap.example.com', 993, true)
+      expect(Net::IMAP).to receive(:new).with('imap.hostinger.com', 993, true)
       service.connect_to_imap
     end
 
@@ -64,7 +64,7 @@ RSpec.describe EmailService do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  describe '#fetch_unread_emails' do
+  describe '#fetch_unread_emails' do # rubocop:disable Metrics/BlockLength
     it 'returns Mail objects for unread emails' do
       raw_email = Mail.new(to: 'user@example.com', from: 'sender@example.com', subject: 'Test').to_s
 
