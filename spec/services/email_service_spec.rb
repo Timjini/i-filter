@@ -11,8 +11,8 @@ RSpec.describe EmailService do # rubocop:disable Metrics/BlockLength
       'address' => 'imap.hostinger.com',
       'port' => 993,
       'enable_ssl' => true,
-      'user_name' => 'info@devhl.dev',
-      'password' => '150150@Hl'
+      'user_name' => 'info@user.com',
+      'password' => 'password'
     }
   end
 
