@@ -1,4 +1,6 @@
-module FileHelper
+# frozen_string_literal: true
+
+module FileHelper # rubocop:disable Style/Documentation
   def self.save_attachment(attachment, filename)
     attachments_dir = 'public'
     FileUtils.mkdir_p(attachments_dir)

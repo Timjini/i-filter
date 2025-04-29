@@ -1,22 +1,25 @@
-class AttachmentService
+# frozen_string_literal: true
 
-  def save_attachments_to_public(attachment)
+class AttachmentService # rubocop:disable Style/Documentation
+  def save_attachments_to_public(attachment) # rubocop:disable Metrics/MethodLength
     return unless attachment
 
     attachments_dir = 'public'
     FileUtils.mkdir_p(attachments_dir)
 
-    filename = attachment.filename || "default_filename.pdf"
-    extension = File.extname(filename).empty? ? '.pdf' : File.extname(filename)
+    filename = attachment.filename || 'default_filename.pdf'
+
+    # Ensure the filename has an extension
+    filename += '.pdf' if File.extname(filename).empty?
 
     file_path = File.join(attachments_dir, filename)
 
     begin
-      if attachment.respond_to?(:decoded) && attachment.decoded
-        attachment_data = attachment.decoded
-      else
-        attachment_data = attachment
-      end
+      attachment_data = if attachment.respond_to?(:decoded) && attachment.decoded
+                          attachment.decoded
+                        else
+                          attachment
+                        end
 
       File.open(file_path, 'wb') do |file|
         file.write(attachment_data)
@@ -28,5 +31,4 @@ class AttachmentService
       nil
     end
   end
-
 end
